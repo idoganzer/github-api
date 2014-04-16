@@ -301,6 +301,10 @@ class Requester {
         if (root.encodedAuthorization!=null)
             uc.setRequestProperty("Authorization", root.encodedAuthorization);
 
+        // Set timeout times
+        uc.setConnectTimeout(this.root.getConnectTimeOut());
+        uc.setReadTimeout(this.root.getReadTimeOut());
+        
         try {
             uc.setRequestMethod(method);
         } catch (ProtocolException e) {

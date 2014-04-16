@@ -56,6 +56,7 @@ import com.infradna.tool.bridge_method_injector.WithBridgeMethods;
  * @author Kohsuke Kawaguchi
  */
 public class GitHub {
+	
     /*package*/ final String login;
 
     /**
@@ -67,7 +68,9 @@ public class GitHub {
     private final Map<String,GHOrganization> orgs = new HashMap<String, GHOrganization>();
 
     private final String apiUrl;
-
+    
+    private  Integer connectTimeOut;
+    private  Integer readTimeOut;
     /**
      * Connects to GitHub.com
      */
@@ -369,6 +372,26 @@ public class GitHub {
             return false;
         }
     }
+    
+    public Integer getConnectTimeOut()
+    {
+    	return (connectTimeOut != null ? connectTimeOut : CONNECT_TIMEOUT_TIME);
+    }
+    
+    public Integer getReadTimeOut()
+    {
+    	return (readTimeOut != null ? readTimeOut : READ_TIMEOUT_TIME);
+    }
+    
+    public void setConnectTimeOut(Integer timeout)
+    {
+    	connectTimeOut = timeout;
+    }
+    
+    public void setreadTimeOut(Integer timeout)
+    {
+    	readTimeOut = timeout;
+    }
 
     /*package*/ static URL parseURL(String s) {
         try {
@@ -402,4 +425,6 @@ public class GitHub {
     }
 
     private static final String GITHUB_URL = "https://api.github.com";
+	private static final int CONNECT_TIMEOUT_TIME = 10000;
+	private static final int READ_TIMEOUT_TIME = 10000;
 }
